@@ -1,0 +1,16 @@
+
+.btn-curved-edge{
+  border-radius: 1.05rem;
+}
+
+.text-field-border{
+  border-radius: 1.85rem;
+  border: 2 solid; 
+}
+.text-xs{
+	font-size:.7rem
+}
+.text-80{
+	font-size:80%;
+}
+

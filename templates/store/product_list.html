@@ -1,0 +1,82 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+<div class="container">
+
+<div class="card">
+    <div class="row ">
+
+
+        <div class="col-sm-4 ">
+          {{product_form.as_p}}
+
+
+        </div>
+
+
+        <div class="col-sm-4 col-md-4 ">
+          <div><input class="form-control"/></div>
+          <div><input class="form-control"/></div>
+          <div><input class="form-control"/></div>
+          <div><input class="form-control"/></div>
+          <div><input class="form-control"/></div>
+
+
+
+        </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+  <h3>Products</h3>
+<br>
+
+  <table class="display table table-bordered" id='' style="width:100%;">
+
+    <thead class="table-dark">
+      <tr>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Available</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in product_list %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.is_active }}</td>
+          <td>{{ product.created_at }}</td>
+          <td>
+            <a  class="btn btn-sm btn-warning"><i class="fas fa-bars"></i> </a>
+            <a  class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+            <a  class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td >No Product available</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a  class="btn btn-primary">Add New Products</a>
+</div>
+{% endblock %}
+
+{% block script %}
+    {% include "includes/messages.html" %}
+{% endblock %}

@@ -1,0 +1,453 @@
+
+{% extends 'store/inventory_base.html' %}
+
+
+    {% block content %}
+
+
+  <!-- ========================= SECTION CONTENT ========================= -->
+
+  <section class="container-fluid m-3 " id="content">
+    <div class="row">
+
+      <div class="col">
+        <div class="container">
+          <div class="row ">
+            <div class="col-md-3 ">
+              <div class="card">
+                <div class="card-header py-1">
+                  <label>Product</label>
+                </div>
+                <div class="card-body">
+
+                  {% for field in product_form %}
+                      {% if field.label == "Category" %}
+                          <label>{{field.label}}</label>
+                          <div class="input-group ">
+
+                              {{field}}
+
+                              <div class="input-group-append">
+                                <button class="input-group-text" id="add-catagory">+</button>
+                              </div>
+                          </div>
+                      {% else %}
+                          <div class="form-group">
+                          <label>{{field.label}}</label>
+                          {{field}}
+                  </div>
+                      {% endif %}
+
+                  {% endfor %}
+
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-9">
+              <div class="card">
+                <div class="card-header py-1">
+                  <h5 class="text-center">Product Details</h5>
+                </div>
+                <div class="card-body">
+                  <table class="table table-hover table-bordered my_table">
+                    <thead>
+                      <th>Size</th>
+                      <th class="">
+                        <div class="d-flex justify-content-between">
+                          <span>Cost</span> <input type="checkbox" class="form-check-input bg-secondary" checked id="check_cost"
+                            value="">
+                        </div>
+                      </th>
+                      <th class="">
+                        <div class="d-flex justify-content-between">
+                          <span>Price</span> <input type="checkbox" id="check_price" checked
+                            class="form-check-input bg-secondary" value="">
+                        </div>
+                      </th>
+                      <th class="">
+                        <div class="d-flex justify-content-between">
+                          <span>SKU</span> <input type="checkbox" id="check_sku" checked class="form-check-input bg-secondary"
+                            value="">
+                        </div>
+                      </th>
+                      <th class="">
+                        <div class="d-flex justify-content-between">
+                          <span>Qty</span> <input type="checkbox" class="form-check-input bg-secondary" checked
+                            id="check_qty" value="">
+                        </div>
+                      </th>
+
+
+                      <th class="text-center"><button class="btn btn-outline-secondary btn-round py-0" id="add-button">+</button></th>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+
+                        <td class="p-1"><input class="form-control" /></td>
+                        <td class="p-1"><input class="form-control field-cost" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-price" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-sku" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-qty" type="number" /></td>
+                        <td class="p-1 text-center"><button class="btn btn-danger btn-round remove-row"><i class="fa fas-trash">-</i></button></td>
+                      </tr>
+
+                      <tr>
+
+                        <td class="p-1"><input class="form-control" /></td>
+                        <td class="p-1"><input class="form-control field-cost" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-price" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-sku" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-qty" type="number" /></td>
+                        <td class="p-1 text-center"><button class="btn btn-danger btn-round remove-row"><i class="fa fas-trash">-</i></button></td>
+                      </tr>
+
+                      <tr>
+
+                        <td class="p-1"><input class="form-control" /></td>
+                        <td class="p-1"><input class="form-control field-cost" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-price" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-sku" type="number" /></td>
+                        <td class="p-1"><input class="form-control field-qty" type="number" /></td>
+                        <td class="p-1 text-center"><button class="btn btn-danger btn-round remove-row"><i class="fa fas-trash">-</i></button></td>
+                      </tr>
+
+
+
+
+                    </tbody>
+                  </table>
+
+
+                  <div class="row px-3">
+                    <button class="btn btn-outline-secondary btn-block" id="add-product">Add</button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="col mt-3">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="text-center">Stock Details</h5>
+                </div>
+                <div class="card-body">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <td>#</td>
+                        <td>Size</td>
+                        <td>Supplied</td>
+                        <td>Sold</td>
+                        <td>Lost</td>
+                        <td>Available</td>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+
+
+
+                    </tbody>
+                  </table>
+                  <div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- container //  -->
+
+        </div>
+
+      </div>
+
+  </section>
+  <section class="section-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 right">
+
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Section Modal -->
+  <!-- The Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form  id="category_form">
+        <div class="modal-body">
+
+
+          {{category_form.as_p}}
+
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+         </form>
+      </div>
+    </div>
+  </div>
+
+ {% endblock %}
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+    {% block scripts %}
+  <script>
+    $(document).ready(function () {
+
+      //sidebar
+      //toggle side bar;
+      $('#toggle-btn').click(function(){
+        $('#sidebar').toggleClass('minimized');
+        $('#content').toggleClass('expanded');
+      });
+      // animations
+
+      $('.list-group-item').each(function (index) {
+        $(this).css('animation-delay', (index * 0.1) + 's');
+      });
+
+      //modals
+      $('#add-catagory').click(function () {
+        $('#myModal').modal('show');
+      });
+
+
+      $('#add-product').click(function(){
+        swal("perfect",'successfull', "success");
+      });
+
+      // table operations
+
+      // add row
+      $('#add-button').click(function () {
+        addNewRow();
+      });
+
+      // remove row
+      $('.my_table').on('click', '.remove-row', function () {
+        $(this).closest('tr').remove();
+      });
+    });
+  </script>
+
+<script> //add row
+  function addNewRow(size) {
+    var newRow = $('<tr></tr>');
+    newRow.html(`
+        <td class="p-1"><input class="form-control field-size" ${size ? 'value="' + size + '"' : ''} /></td>
+        <td class="p-1"><input class="form-control field-cost" type="number" /></td>
+        <td class="p-1"><input class="form-control field-price" type="number" /></td>
+        <td class="p-1"><input class="form-control field-sku" type="number" /></td>
+        <td class="p-1"><input class="form-control field-qty" type="number" /></td>
+        <td class="p-1 text-center"><button class="btn btn-danger btn-round remove-row">-</button></td>
+    `);
+    $('.my_table tbody').append(newRow);
+    setDependecy();
+}
+</script>
+
+  <script>
+    $(function () {
+      setDependecy();
+    });
+
+    function setDependecy() {
+
+      handleCheckboxDependentFields('#check_cost', '.field-cost');
+      handleCheckboxDependentFields('#check_price', '.field-price');
+      handleCheckboxDependentFields('#check_sku', '.field-sku');
+      handleCheckboxDependentFields('#check_qty', '.field-qty');
+    }
+
+    function handleCheckboxDependentFields(checkboxSelector, fieldSelector) {
+      const $checkbox = $(checkboxSelector);
+      const $inputs = $(fieldSelector);
+      let currentValue = '';
+
+      $inputs.on('keyup', function () {
+        currentValue = $(this).val();
+        if ($checkbox.is(':checked')) {
+          $inputs.val(currentValue);
+        }
+      });
+
+      $checkbox.on('change', function () {
+        if (this.checked) {
+          $inputs.val(currentValue);
+        } else {
+          $inputs.val('');
+        }
+      });
+
+      // Set initial state of input fields based on checkbox state
+      $inputs.each(function () {
+        if ($checkbox.is(':checked')) {
+          $(this).val(currentValue);
+        } else {
+          $(this).val('');
+        }
+      });
+    }
+  </script>
+
+
+<script>
+
+    function categoryChanged(input){
+
+        var  category = $("#id_category");
+        const categoryId = $("#id_category option:selected").val();
+        if (categoryId == ''){
+         $('.my_table tbody').empty();
+        }
+        else{
+          $.ajax({
+             url: '/api/grouped-sizes/filter_by_category/', // api url
+             type: 'GET',
+             data: {
+                        category_id: categoryId   //url parameter
+                    },
+              success:function(data){
+                            $('.my_table tbody').empty();
+                            if (data.length > 0) {
+                            data.forEach(function(groupedSize) {
+
+
+                                addNewRow(groupedSize.size);
+                            });
+                        } else {
+                            console.log('<p>No grouped sizes found for this category.</p>');
+                             addNewRow();
+                        }
+
+           },
+
+       failure:function(data){
+              alert('got an error dude');
+       }
+    });
+
+        }
+
+
+    }
+
+</script>
+
+{% csrf_token %}
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
+
+<script>
+    $("#category_form").submit(function (e) {
+
+    e.preventDefault();
+
+    var serializedData = $(this).serialize();
+
+    $.ajax({
+       type:'POST',
+       headers:{
+            'X-CSRFToken': csrftoken
+        },
+       url: '/api/categories/' ,
+       data: serializedData,
+       success : function(response){
+           $("#myModal").modal("toggle")
+           $("#category_form").trigger('reset');
+           var c = loadCategories();
+
+
+           alert('dkdk');
+           //swal("perfect",'successfull', "Category added successfully");
+
+       },
+       error: function(xhr, status, error) {
+            // Handle the error
+            swal("Error",'error', "Something went wrong.");
+
+
+        }
+     })
+   });
+
+</script>
+<script>
+  function loadCategories(){
+   var categories ;
+   $.ajax({
+       type:'GET',
+
+       url: '/api/categories/' ,
+       success : function(data){
+          categories = data;
+          console.log(categories);
+
+       },
+       error: function(xhr, status, error) {
+            // Handle the error
+            swal("Error",'error', "Something went wrong.");
+
+
+        }
+     });
+     return categories;
+  }
+</script>
+    {% endblock %}
+</body>
+
+</html>

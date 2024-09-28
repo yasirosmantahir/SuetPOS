@@ -1,0 +1,69 @@
+
+{% load static %}
+<!--    <script src=" {% static 'bootstrap/js/all.min.js' %}"></script>-->
+<!--    <script src=" {% static 'bootstrap/js/jquery.min.js' %}"></script>-->
+<!--    <script src=" {% static 'bootstrap/js/bootstrap.min.js' %}"></script>-->
+
+    <script src=" {% static 'bootstrap/js/bs-init.js' %}"></script>
+    <script src=" {% static 'bootstrap/js//jquery.easing.js' %}"></script>
+    <script src=" {% static 'bootstrap/js/theme.js' %}"></script>
+
+<!--    <script src=" {% static 'bootstrap/jsFromTemplate/datatables.js' %}"></script>-->
+    <script src=" {% static 'bootstrap/jsFromTemplate/scripts.js' %}"></script>
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+
+<script>
+    function std_imgURL(input){
+        if(input.files && input.files[0]){
+           var reader = new FileReader();
+
+           reader.onload = function(e){
+              $('#studentPhoto').attr('src',e.target.result);
+              };
+
+           reader.readAsDataURL(input.files[0]);
+        }
+     }
+</script>
+
+<script>
+    function gurd_imgURL(input){
+        if(input.files && input.files[0]){
+           var reader = new FileReader();
+
+           reader.onload = function(e){
+              $('#guardianPhoto').attr('src',e.target.result);
+              };
+
+           reader.readAsDataURL(input.files[0]);
+        }
+     }
+</script>
+
+<script>
+    $("#form_modal").submit(function (e) {
+
+    e.preventDefault();
+
+    var serializedData = $(this).serialize();
+
+    $.ajax({
+       type:'POST',
+       url: "{% url 'post_friend' %}",
+       data: serializedData,
+       success : function(response){
+           $("#form_modal").trigger('reset');
+           $("#guardian").modal("toggle")
+
+
+
+           alert( "guardian is registered");
+
+       }
+     })
+   });
+
+</script>
+

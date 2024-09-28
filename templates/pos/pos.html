@@ -1,0 +1,453 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title></title>
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'pos/assets/images/logos/squanchy.jpg' %}" >
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'pos/assets/images/logos/squanchy.jpg' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'pos/assets/images/logos/squanchy.jpg' %}">
+<!-- jQuery -->
+<!-- Bootstrap4 files-->
+<link href="{% static 'pos/assets/css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'pos/assets/css/ui.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'pos/assets/fonts/fontawesome/css/fontawesome-all.min.css' %}" type="text/css" rel="stylesheet">
+<link href="{% static 'pos/assets/css/OverlayScrollbars.css' %}" type="text/css" rel="stylesheet"/>
+<!-- Font awesome 5 -->
+<style>
+	.avatar {
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.bg-default, .btn-default{
+	background-color: #f2f3f8;
+}
+.btn-error{
+	color: #ef5f5f;
+}
+.text-primary{
+text-color:#000000;
+}
+
+@keyframes breath {
+  0%   { background-size: 100% auto; }
+  50% { background-size: 140% auto; }
+  100% { background-size: 100% auto; }
+}
+
+.bkg{
+  width: 100%;
+  height: 100%;
+  animation: breath 100s linear infinite;
+
+  background: url("{% static 'img/retail1.jpg' %}") center center no-repeat;
+
+}
+.form-price{
+ width:50%;
+ border:grey;
+}
+
+
+</style>
+<!-- custom style -->
+</head>
+<body>
+
+<section class="header-main">
+	<div class="container ">
+<div class="d-flex justify-content-between">
+
+		<h2 class="logo-text ">Mender POS</h2>
+
+	<div class="col-lg-7 col-sm-7">
+		<div class="widgets-wrap d-flex justify-content-end">
+
+			<div class="widget-header dropdown">
+				<a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10">
+					<span href="#" class="icontext text-secondary">
+					Welcome {{ user }}
+					<img src=" {% static 'pos/assets/images/image_placeholder.png' %}" class="avatar" alt="">
+
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+						<a class="dropdown-item" href="{% url 'help' %}"><i class="fa fa-gem"></i> Help</a>
+						<a class="dropdown-item" href="management/"><i class="fa fa-gem"></i> Management</a>
+						<li><a class="dropdown-item" href="{% url 'change-password' %}"><i class="fa fa-user"></i>Change Password</a></li>
+						<li><a class="dropdown-item" href="{% url 'sales' %}"><i class="fa fa-user"></i>Reports</a></li>
+						<a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+
+				</div> <!--  dropdown-menu .// -->
+			</div> <!-- widget  dropdown.// -->
+		</div>	<!-- widgets-wrap.// -->
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+	</div> <!-- container.// -->
+</section>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y-sm bg-default bkg">
+<div class="container-fluid ">
+<div class="row ">
+	<div class="col-md-6 ">
+		<center>
+			<div class="col-lg-6  ">
+					<div class="input-group my-3 " >
+
+						<input type="number" id="sku-input" class="form-control" style="background-color: rgba(255, 255, 255, 0.9);" placeholder="Scan barcode" autofocus>
+						<div class="input-group-append 	" >
+						  <button class="btn btn-primary" >
+							<i class="fa fa-search " ></i>
+						  </button>
+						</div>
+
+					</div>
+
+			</div> <!-- col.// -->
+		</center>
+
+
+	</div>
+	<div class="col-md-6">
+<div class="card " style="background-color: rgba(255, 255, 255, 0.9);">
+	<span id="cart">
+<table class="table table-hover table-bordered shopping-cart-wrap" id="order_table" >
+<thead class="text-muted">
+<tr>
+  <th scope="col" class="text-center text-primary" >Item</th>
+  <th scope="col" class="text-center text-primary" width="120">Size</th>
+  <th scope="col" class="text-center text-primary" width="120">Qty</th>
+  <th scope="col" class="text-center text-primary" width="120">Price(NKF)</th>
+  <th scope="col" class="text-center text-primary" width="120">Delete</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+</span>
+</div> <!-- card.// -->
+<div class="box mt-2">
+
+
+
+<dl class="dlist-align my-3">
+  <dt>Total: </dt>
+  <dd class="text-right h4 b" > <span id="total">0</span>  </dd>
+</dl>
+<div class="row my-2">
+	<div class="col mb-2">
+		<button id="void-order-btn" class="btn   btn-error btn-block"><i class="fa fa-times-circle "></i> Void </button>
+	</div>
+	<div class="col mb-2">
+
+		<button id="cancle-order-btn" class="btn  btn-secondary  btn-block"><b class="fa fa-times-circle"></b> Cancel </button>
+	</div>
+	<div class="col mb-2">
+
+		<button id="place-order-btn" class="btn  btn-primary  btn-block"><b class="fa fa-shopping-bag"></b> Charge </button>
+	</div>
+</div>
+</div> <!-- box.// -->
+	</div>
+</div>
+</div><!-- container //  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<script src="{% static 'pos/assets/js/jquery-3.5.1.js' %}" type="text/javascript"></script>
+<script src="{% static 'pos/assets/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'pos/assets/js/JsBarcode.all.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'pos/assets/js/OverlayScrollbars.js' %}" type="text/javascript"></script>
+<script src="{% static 'pos/assets/js/sweetalert.min.js' %}"></script>
+<script>
+	$(function() {
+	//The passed argument has to be at least a empty object or a object with your desired options
+	//$("body").overlayScrollbars({ });
+	$("#items").height(552);
+	$("#items").overlayScrollbars({overflowBehavior : {
+		x : "hidden",
+		y : "scroll"
+	} });
+	$("#cart").height(445);
+	$("#cart").overlayScrollbars({ });
+});
+</script>
+
+{% csrf_token %}
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
+
+<script>
+	$(document).ready(function() {
+	var table_row_count=0;
+	// Attach a keydown event handler to the SKU input field
+
+  // Attach a keydown event handler to the SKU input field
+  $('#sku-input').keydown(function(event) {
+    // Check if the Enter key was pressed
+    if (event.keyCode === 13) {
+      // Retrieve the SKU value
+      var sku = $(this).val();
+
+      // Make the AJAX request to fetch the product details
+      $.ajax({
+			url: `store/products/by-sku/${sku}/`,
+        type: 'GET',
+        success: function(data) {
+          // Handle the response data
+
+
+          // Update the product table on the page
+
+          var exist = null;
+          $('.order-item').each(function() {
+
+    		var productId = $(this).data('product-id');
+    		var quantity = $(this).val();
+
+    		if(data.id==productId){
+    			exist = $(this);
+    		}
+
+
+  			});
+
+          if(exist == null){
+          	 $('#order_table > tbody:last-child').append(`<tr id=r_${table_row_count}>
+          												<td><figure class="media">
+          													<div class="img-wrap"><img src="${data.image}" class="img-thumbnail img-xs"></div>
+          																				<figcaption class="media-body">
+          																					<h6 class="title text-truncate">${data.name}  </h6>
+
+          																				</figcaption></figure>
+          												</td>
+          												<td class="text-center" ><div class="price-wrap"><var>${data.size}</var></div></td>
+
+          												<td class="text-center" width="25%">
+
+          																<div class="input-group">
+																				<div class="input-group-append">
+																					<button type="button" class="m-btn btn btn-default"
+																								onclick="if($('table#order_table tr#r_${table_row_count} input').val()>0)
+																											{$('table#order_table tr#r_${table_row_count} input').val(parseInt($('table#order_table tr#r_${table_row_count} input').val())-1);
+																											 $('#total').text( parseFloat($('#total').text()) - parseFloat(${data.unit_price}));
+
+
+																											}">
+																					<i class="fa fa-minus"></i></button>
+																				</div>
+																				<input id="${data.id}" class="form-control order-item" type="number" disabled data-product-id="${data.id}" data-product-price="${data.unit_price}" value=1 >
+																				<div class="input-group-append">
+						  															<button type="button" class="m-btn btn btn-default"
+						  																onclick="$('table#order_table tr#r_${table_row_count} input').val(parseInt($('table#order_table tr#r_${table_row_count} input').val())+1);
+						  																 $('#total').text( parseFloat($('#total').text()) + parseFloat(${data.unit_price}));
+																											">
+						  																<i class="fa fa-plus"></i></button>
+																				</div>
+																		</div>
+
+
+          												</td>
+          												<td><div class="price-wrap text-sm"><input type="number" class="from-price" onchange="updatePrice(${data.id})" id='item_price_${data.id}' value="${data.unit_price}"/></div></td>
+          												<td class="text-center"><button onclick="
+          																						var temp = parseFloat(${data.unit_price})*parseInt($('table#order_table tr#r_${table_row_count} input').val());
+
+          																						$('#total').text( parseFloat($('#total').text())-temp);
+
+          																						$('table#order_table tr#r_${table_row_count}').remove();
+
+          																						"
+          																						class="btn btn-outline-danger btn-round"> <i class="fa fa-trash"></i></button></td>
+          												</tr>`);
+          }
+          else{
+
+           exist.val(parseFloat(exist.val())+1);
+          }
+
+
+          // Clear the SKU input field
+          $('#sku-input').val('');
+          table_row_count = table_row_count + 1
+
+          $('#total').text( parseFloat($('#total').text()) + parseFloat(data.unit_price));
+
+
+          // Focus on the SKU input field
+          $('#sku-input').focus();
+
+        },
+        error: function(xhr, status, error) {
+          // Handle the error
+
+          showMessage(xhr.responseJSON.error,0);
+
+          // Clear the SKU input field
+          $('#sku-input').val('');
+
+          // Focus on the SKU input field
+          $('#sku-input').focus();
+        }
+      });
+    }
+  });
+
+  // Cancle Order
+  $('#cancle-order-btn').click(function() {
+  		clearOrderItems();
+  		showMessage("Order cancled",1);
+
+  });
+
+  // Void Order
+  $('#void-order-btn').click(function() {
+	alert("void");
+	var voidItems = {
+
+      "order_items": getOrderItems()
+    };
+    // Send the order data to the server using AJAX
+    $.ajax({
+      url: 'pos/orders/void/',
+      type: 'GET',
+      data: voidItems,
+      success: function(data) {
+        // Handle the successful response
+
+        // Clear the order items table
+        clearOrderItems();
+
+        // Display a success message or update the UI as needed
+        showMessage("Order Void",1);
+
+
+      },
+      error: function(xhr, status, error) {
+        // Handle the error
+
+        showMessage(xhr.responseJSON.error,2);
+
+		// Clear the order items table
+        clearOrderItems();
+        showErrorMessage('Error placing the order. Please try again.');
+      }
+    });
+   });
+
+
+  // Attach a click event handler to the "Place Order" button
+  $('#place-order-btn').click(function() {
+    // Collect the order data
+
+    var orderData = {
+
+      "order_items":  JSON.stringify(getOrderItems())
+    };
+
+
+
+
+    // Send the order data to the server using AJAX
+    $.ajax({
+      url: 'pos/orders/create/',
+      type: 'POST',
+      headers:{
+      'X-CSRFToken': csrftoken
+      },
+      data: orderData,
+      success: function(data) {
+        // Handle the successful response
+
+        // Clear the order items table
+        clearOrderItems();
+
+        // Display a success message or update the UI as needed
+        showMessage("Order created",1);
+
+      },
+      error: function(xhr, status, error) {
+        // Handle the error
+
+        showMessage(xhr.responseJSON.error,2);
+
+		// Clear the order items table
+        clearOrderItems();
+        //showErrorMessage('Error placing the order. Please try again.');
+      }
+    });
+  });
+});
+
+function updatePrice(id){
+
+    var p = $(`#item_price_${id}`).val();
+    $(`#${id}`).data('product-price',`${p}`);
+}
+function calculateTotalAmount() {
+  // Logic to calculate the total order amount
+  // based on the order items
+  // ...
+  return totalAmount;
+}
+
+function getOrderItems() {
+  var orderItems = [];
+  var a = {};
+  // Assuming you have a table or a list of order items
+  $('.order-item').each(function() {
+
+    var productId = $(this).data('product-id');
+    var productPrice = $(this).data('product-price');
+    var quantity = $(this).val();
+
+
+    orderItems.push({
+
+      product_id: productId,
+      product_price: productPrice,
+      quantity: quantity
+    });
+
+  });
+
+  return orderItems;
+}
+
+function clearOrderItems() {
+  // Logic to clear the order items table
+  // ...
+  $('#order_table tbody tr').remove();
+  $('#total').text(0);
+
+}
+
+
+
+
+
+</script>
+<script>
+    function showMessage(message,type){
+
+        var m = message;
+        // show success message
+        if (type==1){
+        	swal("Perfect !", m, "success")
+        }
+        // show error message
+        else{
+        	swal("Error !", m, "error")
+        }
+
+       }
+</script>
+
+</body>
+</html>

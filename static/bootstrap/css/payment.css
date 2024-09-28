@@ -1,0 +1,24 @@
+.bg-black {
+  background: #000;
+  color: #fff; }
+
+.bg-light-1 {
+  background: #ebebeba6;
+  }
+
+
+.border-bottom{
+border-bottom : 1px solid black}
+
+
+
+.card-border-0 {
+  border : 0px;
+}
+#main-header .port-item {
+  width: 50%; }
+  
+#main-header .port-item:hover {
+  opacity: 0.8;
+  cursor: pointer; }
+

@@ -1,0 +1,215 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title></title>
+
+
+  <!-- Bootstrap4 files-->
+  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+  <!-- jQuery -->
+  <script src="{% static 'store/js/jquery-3.6.0.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/js/propper.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'store/js/sweetalert.min.js' %}" type="text/javascript"></script>
+
+  <!-- Font awesome 5 -->
+  <style>
+    .bg-default,
+    .btn-default {
+      background-color: #f2f3f8;
+    }
+
+    .btn-error {
+      color: #ef5f5f;
+    }
+
+
+    .text-primary {
+      text-color: #000000;
+    }
+
+    @keyframes breath {
+      0% {
+        background-size: 100% auto;
+      }
+
+      50% {
+        background-size: 140% auto;
+      }
+
+      100% {
+        background-size: 100% auto;
+      }
+    }
+
+
+    .form-price {
+      width: 50%;
+      border: grey;
+    }
+
+    .form-control {
+      padding-top: 1%;
+      padding-bottom: 1%;
+      margin: 0%;
+    }
+
+    .my_table {
+      border-radius: 26px;
+    }
+
+
+
+    .card-header {
+      background-color: #436d88ee;
+      color: #ffffff;
+    }
+
+    .main-header {
+      background-color: #436d88ee;
+      border-radius: 10px 10px 10px 10px;
+      padding: 5px;
+
+    }
+
+    .modal-header {
+      background-color: #436d88ee;
+      padding-bottom: 5px;
+
+    }
+
+    .sidebar {
+      position:fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100%;
+
+      background-color: #d4dce256;
+      border-radius: 0px 0px 5px 5px;
+      padding: 10px 0px 10px 10px;
+      transition: transform 0.3s ease;/* smooth transition */
+      transform: translate(-95%); /* start hidden */
+    }
+    .sidebar.minimized{
+      transform:translateX(0);/* slide in */
+    }
+
+    #content{
+      transition: margin-left 0.3s ease; /*smooth transition */
+    }
+    #content.expanded{
+      margin-left:250px;
+    }
+
+    .links {
+      background-color: #436d88ee;
+      color: #ffffff;
+      border-radius: 0px 0px 60px 0px;
+    }
+
+    .inline-block {
+      display: inline-block;
+    }
+
+    .btn-round {
+      border-radius: 25%;
+      padding: .2rem .4rem;
+    }
+
+    .list-group-item {
+      opacity: 0;
+      transform: translateX(-50px);
+      animation: slideIn 0.5s ease-in-out forwards;
+    }
+
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Toggle button styles */
+    .toggle-btn {
+      width: 30px;
+      height: 30px;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: left 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 250px;
+    }
+
+    .toggle-btn.open {
+      left: 250px;
+    }
+
+    /* Main content styles */
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+  </style>
+  <!-- custom style -->
+</head>
+
+<body >
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+  <section class="sidebar" id="sidebar">
+
+    <div class="d-flex justify-content-between">
+      <span></span>
+      <button class="btn btn-secondary p-0 toggle-btn" id="toggle-btn">>></button>
+    </div>
+    <div class="main-header mb-3 mr-2 ">
+
+          <h2>Mender POS</h2>
+
+
+
+
+      </div> <!-- header.// -->
+    <div class="col mr-2">
+      <div class="list-group ">
+        <a href="product.html" class="list-group-item list-group-item-action links">Add Product</a>
+        <a href="edit_product.html" class="list-group-item list-group-item-action links">Edit Product</a>
+        <a href="inventory.html" class="list-group-item list-group-item-action links">Inventory</a></a>
+        <a href="report.html" class="list-group-item list-group-item-action links">Report</a>
+      </div>
+
+    </div>
+  </section>
+
+
+    {% block scripts %}
+
+    {% endblock %}
+
+</body>
+
+</html>

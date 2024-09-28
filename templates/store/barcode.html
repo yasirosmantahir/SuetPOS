@@ -1,0 +1,108 @@
+{% extends 'admin/base_site.html' %}
+
+
+{% load static %}
+{% block header %}
+
+<link href="{% static 'pos/assets/css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 2px;
+            margin: 2px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+</style>
+
+<div id="content" class="container">
+    <h1><b>Generate Barcode</b></h1>
+    <div class="alert alert-info">
+        <strong>Info !</strong> If quantity is 0 by default be sure product is out of stock.
+    </div>
+    <div class="m-auto col-md-5">
+        <input type="number" id="quantity" value="{{ quantity }}" oninput="display_barcode(this)">
+        <button class="btn btn-secondary btn-sm w-25 " onclick="printDocument('barcode_area')">
+        <i class="fas fa-pdf"></i>Print
+        </button>
+    </div>
+
+
+        <div class="m-auto col-md-5  my-3" id="barcode_area">
+
+
+
+    </div>
+
+
+
+</div>
+
+
+<script src="{% static 'pos/assets/js/jquery-3.5.1.js' %}" type="text/javascript"></script>
+<script src="{% static 'pos/assets/js/JsBarcode.all.min.js' %}" type="text/javascript"></script>
+
+<script>
+    function render_sku(id){
+    JsBarcode(id, "{{product_detail.sku}}", {
+                    format: "EAN13",
+                    displayValue: true,
+                    fontSize: 14,
+                    width: 2,
+                    height: 60
+                    });
+    }
+
+</script>
+
+<script>
+
+       function display_barcode(){
+       var barcode_area = $('#barcode_area');
+       var quantity = $('#quantity').val();
+       //remove previous
+       $('#barcode_area .row').remove();
+       for (let i = 0; i < quantity; i++) {
+            //create the svg tag
+            barcode_area.append(`<div class="card my-2 row" style="page-break-before:always;">
+                                        <div class="text-bold text-center">
+                                            <span >{{product_detail.product.name}}</span>
+                                            <span >{{product_detail.size}}</span><br>
+                                            <svg id="sku"></svg>
+                                        </div>
+                                   </div>`);
+            //display the sku
+            render_sku("#sku");
+
+        }
+       }
+
+       function printDocument(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+
+                document.body.innerHTML = printContents;
+
+                window.print();
+
+                document.body.innerHTML = originalContents;
+
+
+
+       }
+
+display_barcode();
+
+</script>
+{% endblock %}

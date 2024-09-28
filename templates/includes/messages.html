@@ -1,0 +1,15 @@
+{% load static %}
+<!-- Messages -->
+{%for message in messages%}
+{% if message.tags == 'success' %}
+<script src="{% static 'bootstrap/sweetalert.min.js' %}"></script>
+<script>
+        var m = "{{ message|safe }}";
+
+        swal("Perfect !", m, "success")
+    </script>
+{% endif %}
+{% endfor%}
+
+
+
